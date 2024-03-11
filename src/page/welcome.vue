@@ -1,6 +1,5 @@
 <template>
   <div class="login_page fillcontain">
-    <transition name="form-fade" mode="in-out">
       <section class="form_contianer">
         <div class="manage_tip">
           <p>欢迎来到穿搭世界</p>
@@ -9,7 +8,7 @@
           <p>记录你的每日穿搭</p>
         </div>
       </section>
-    </transition>
+
   </div>
 </template>
 
@@ -55,11 +54,11 @@ export default {
 
 .form_contianer {
   .wh(320px, 290px);
-  .ctp(320px, 210px);
+  .ctp(400px, 210px);
   padding: 25px;
   border-radius: 5px;
   text-align: center;
-  background-color: #fff;
+  background-color: #324057;
 
   .submit_btn {
     width: 100%;

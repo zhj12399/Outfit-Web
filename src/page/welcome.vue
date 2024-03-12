@@ -7,8 +7,8 @@
         <div class="manage_smalltip">
           <p>记录你的每日穿搭</p>
         </div>
+        <el-button type="primary" @click='Go_In' class="submit_btn">开启</el-button>
       </section>
-
   </div>
 </template>
 
@@ -17,7 +17,11 @@ export default {
   name: "welcome",
   data() {
   },
-  methods: {}
+  methods: {
+    Go_In() {
+      this.$router.push('login')
+    },
+  }
 }
 </script>
 

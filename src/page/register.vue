@@ -70,8 +70,8 @@ export default {
                     type: 'success',
                     message: "注册成功，欢迎来到穿搭世界！"
                   });
-                  sessionStorage.setItem("loginid",data.data.toString())
-                  this.$router.push('manage')
+                  sessionStorage.setItem("login_name",this.loginForm.username)
+                  this.$router.replace('manage')
                 }
               },
               () => {
@@ -79,7 +79,8 @@ export default {
                   type: 'error',
                   message: "网络错误"
                 });
-                this.$router.push('/');
+                this.componentKey = Date.now();
+                this.$router.replace('/');
               })
         }
       }

@@ -11,10 +11,10 @@
         </div>
         <el-form :model="loginForm" :rules="rules" ref="loginForm">
           <el-form-item prop="username">
-            <el-input v-model="loginForm.username" ref="usernameInput" placeholder="用户名"></el-input>
+            <el-input v-model="loginForm.username" ref="usernameInput" placeholder="用户名" clearable></el-input>
           </el-form-item>
           <el-form-item prop="password">
-            <el-input type="password" placeholder="密码" v-model="loginForm.password"></el-input>
+            <el-input type="password" placeholder="密码" v-model="loginForm.password" clearable></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click='Go_login' class="submit_btn">登录</el-button>
@@ -63,13 +63,13 @@ export default {
             "password": this.loginForm.password
           }).then(
               (data) => {
-                if (data.data !== 0) {
+                if (data.data) {
                   this.$message({
                     type: 'success',
                     message: "登陆成功"
                   });
-                  sessionStorage.setItem("login_name", data.data.toString())
-                  // this.$router.push('manage')
+                  sessionStorage.setItem("login_name", this.loginForm.username)
+                  this.$router.replace('manage')
                 } else {
                   this.loginForm.password = ""
                   this.loginForm.username = ""
@@ -80,12 +80,12 @@ export default {
                 }
               },
               () => {
-                console.log(this.loginForm.username)
                 this.$message({
                   type: 'error',
                   message: "网络错误"
                 });
-                this.$router.push('/');
+                this.componentKey = Date.now();
+                this.$router.replace('/');
               })
         } else {
           this.$message({

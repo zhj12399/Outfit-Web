@@ -31,7 +31,7 @@
 export default {
   name: "login",
   data() {
-    return{
+    return {
       loginForm: {
         username: '',
         password: '',
@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     Go_register() {
-      this.$router.push('register')
+        this.$router.push('register')
     },
     Go_login() {
       if (this.loginForm.username.length !== 0) {
@@ -58,13 +58,14 @@ export default {
             "password": this.loginForm.password
           }).then(
               (data) => {
+                console.log(data)
                 if (data.data !== 0) {
                   this.$message({
                     type: 'success',
                     message: "登陆成功"
                   });
-                  sessionStorage.setItem("loginid", data.data.toString())
-                  this.$router.push('manage')
+                  sessionStorage.setItem("login_name", data.data.toString())
+                  // this.$router.push('manage')
                 } else {
                   this.loginForm.password = ""
                   this.loginForm.username = ""

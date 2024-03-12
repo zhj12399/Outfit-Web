@@ -124,7 +124,7 @@ export default {
 }
 
 .form_contianer {
-  .wh(320px, 210px);
+  .wh(320px, 220px);
   .ctp(320px, 210px);
   padding: 25px;
   border-radius: 5px;

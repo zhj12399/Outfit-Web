@@ -1,13 +1,8 @@
 <template>
   <div class="login_page fillcontain">
+    <router-view :key="componentKey"></router-view>
     <transition name="form-fade" mode="in-out">
       <section class="form_contianer">
-        <div class="manage_tip">
-          <p>欢迎来到穿搭世界</p>
-        </div>
-        <div class="manage_smalltip">
-          <p>记录你的每日穿搭</p>
-        </div>
         <el-form :model="loginForm" :rules="rules" ref="loginForm">
           <el-form-item prop="username">
             <el-input v-model="loginForm.username" placeholder="用户名" maxlength = "10" clearable></el-input>
@@ -32,6 +27,7 @@ export default {
   name: "register",
   data() {
     return{
+      componentKey: Date.now(),
       loginForm: {
         username: '',
         password1: '',

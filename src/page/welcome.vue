@@ -1,5 +1,6 @@
 <template>
   <div class="login_page fillcontain">
+    <router-view :key="componentKey"></router-view>
       <section class="form_contianer">
         <div class="manage_tip">
           <p>欢迎来到穿搭世界</p>
@@ -16,10 +17,16 @@
 export default {
   name: "welcome",
   data() {
+    return{
+      // 初始时就设置一个时间戳
+      componentKey: Date.now(),
+    }
   },
   methods: {
     Go_In() {
-      this.$router.push('login')
+      // 更改路由前，更新key为新的时间戳，强制重新渲染
+      this.componentKey = Date.now();
+      this.$router.replace('login')
     },
   }
 }

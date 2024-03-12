@@ -1,5 +1,6 @@
 <template>
   <div class="login_page fillcontain">
+    <router-view :key="componentKey"></router-view>
     <transition name="form-fade" mode="in-out">
       <section class="form_contianer">
         <div class="manage_tip">
@@ -10,7 +11,7 @@
         </div>
         <el-form :model="loginForm" :rules="rules" ref="loginForm">
           <el-form-item prop="username">
-            <el-input v-model="loginForm.username" placeholder="用户名"></el-input>
+            <el-input v-model="loginForm.username" ref="usernameInput" placeholder="用户名"></el-input>
           </el-form-item>
           <el-form-item prop="password">
             <el-input type="password" placeholder="密码" v-model="loginForm.password"></el-input>
@@ -32,6 +33,8 @@ export default {
   name: "login",
   data() {
     return {
+      // 初始时就设置一个时间戳
+      componentKey: Date.now(),
       loginForm: {
         username: '',
         password: '',
@@ -48,7 +51,9 @@ export default {
   },
   methods: {
     Go_register() {
-        this.$router.push('register')
+      // 更改路由前，更新key为新的时间戳，强制重新渲染
+      this.componentKey = Date.now();
+      this.$router.push('register')
     },
     Go_login() {
       if (this.loginForm.username.length !== 0) {
@@ -58,7 +63,6 @@ export default {
             "password": this.loginForm.password
           }).then(
               (data) => {
-                console.log(data)
                 if (data.data !== 0) {
                   this.$message({
                     type: 'success',
@@ -76,6 +80,7 @@ export default {
                 }
               },
               () => {
+                console.log(this.loginForm.username)
                 this.$message({
                   type: 'error',
                   message: "网络错误"
@@ -95,7 +100,7 @@ export default {
         });
       }
     },
-  }
+  },
 }
 </script>
 

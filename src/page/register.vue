@@ -5,13 +5,15 @@
       <section class="form_contianer">
         <el-form :model="loginForm" :rules="rules" ref="loginForm">
           <el-form-item prop="username">
-            <el-input v-model="loginForm.username" placeholder="用户名" maxlength = "10" clearable></el-input>
+            <el-input v-model="loginForm.username" placeholder="用户名" maxlength="10" clearable></el-input>
           </el-form-item>
           <el-form-item prop="password1">
-            <el-input type="password" placeholder="密码" v-model="loginForm.password1" maxlength = "15" clearable></el-input>
+            <el-input type="password" placeholder="密码" v-model="loginForm.password1" maxlength="15"
+                      clearable></el-input>
           </el-form-item>
           <el-form-item prop="password2">
-            <el-input type="password" placeholder="确认密码" v-model="loginForm.password2" maxlength = "15" clearable></el-input>
+            <el-input type="password" placeholder="确认密码" v-model="loginForm.password2" maxlength="15"
+                      clearable></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click='register' class="submit_btn">注册</el-button>
@@ -26,7 +28,7 @@
 export default {
   name: "register",
   data() {
-    return{
+    return {
       componentKey: Date.now(),
       loginForm: {
         username: '',
@@ -64,15 +66,13 @@ export default {
             "name": this.loginForm.username,
             "password": this.loginForm.password1
           }).then(
-              (data) => {
-                if (data.data){
-                  this.$message({
-                    type: 'success',
-                    message: "注册成功，欢迎来到穿搭世界！"
-                  });
-                  sessionStorage.setItem("login_name",this.loginForm.username)
-                  this.$router.replace('manage')
-                }
+              () => {
+                this.$message({
+                  type: 'success',
+                  message: "注册成功，欢迎来到穿搭世界！"
+                });
+                sessionStorage.setItem("login_name", this.loginForm.username)
+                this.$router.replace('manage')
               },
               () => {
                 this.$message({

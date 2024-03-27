@@ -62,8 +62,8 @@ export default {
             "name": this.loginForm.username,
             "password": this.loginForm.password
           }).then(
-              (data) => {
-                if (data.data) {
+              (response) => {
+                if (response.data) {
                   this.$message({
                     type: 'success',
                     message: "登陆成功"

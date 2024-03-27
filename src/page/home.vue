@@ -5,15 +5,15 @@
       <header class="section_title">穿搭世界</header>
       <el-row></el-row>
       <el-row :gutter="8">
-        <el-col :span="6">
+        <el-col :span="8">
           <div class="data_list all_head"><span class="data_num head">{{ today_time }}</span></div>
         </el-col>
       </el-row>
       <el-row :gutter="8">
-
+        {{ last_time_one }}
       </el-row>
       <el-row :gutter="8">
-        哈哈哈
+        {{last_time_two}}
       </el-row>
     </section>
   </div>
@@ -26,8 +26,9 @@ export default {
   data() {
     return {
       login_name: sessionStorage.getItem("login_name"),
-      today_time:"",
-      last_time:"",
+      today_time: "",
+      last_time_one: "",
+      last_time_two: "",
     }
   },
   created() {
@@ -38,13 +39,24 @@ export default {
   },
   mounted() {
     var nowtime = new Date();
-    this.today_time = "今天是："+nowtime.getFullYear() + '-' + (nowtime.getMonth() + 1) + '-' + nowtime.getDate()
+    this.today_time = "今天是：" + nowtime.getFullYear() + '-' + (nowtime.getMonth() + 1) + '-' + nowtime.getDate()
     this.$axios.post('outfit/get_last_outfit?name=' + this.login_name).then(
-        (data) => {
-          console.log(data)
+        (response) => {
+          console.log(response)
+          if (response.data === "") {
+            this.last_time_one = "还没有记录穿搭过呦，快去添加吧";
+          } else {
+            this.last_time_one = "上次的记录是" + response.data.year+"年"+response.data.month+"月"+response.data.day+"日，上次的天气温度为："+response.data.t+"摄氏度。";
+            this.last_time_two = "上身："+response.data.up+" 下身："+response.data.down+" 鞋子："+response.data.shoes+" 手饰："+response.data.hands
+          }
+        },
+        (err) => {
+          this.$message({
+            type: 'error',
+            message: '错误信息：' + err
+          });
         }
     )
-    "上次记录的日期为"
   },
   computed: {},
   methods: {}

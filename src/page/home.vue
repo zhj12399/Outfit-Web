@@ -3,9 +3,16 @@
     <head-top></head-top>
     <section class="data_section">
       <header class="section_title">穿搭世界</header>
-
+      <el-row></el-row>
+      <el-row :gutter="8">
+        <el-col :span="6">
+          <div class="data_list all_head"><span class="data_num head">{{ today_time }}</span></div>
+        </el-col>
+      </el-row>
+      <el-row :gutter="8">
+        {{ last_time }}
+      </el-row>
     </section>
-    <div id="chartLineBox" style="width: 90%;height:450px;"></div>
   </div>
 </template>
 
@@ -16,6 +23,8 @@ export default {
   data() {
     return {
       login_name: sessionStorage.getItem("login_name"),
+      today_time:"",
+      last_time:"",
     }
   },
   created() {
@@ -25,6 +34,10 @@ export default {
     headTop,
   },
   mounted() {
+    var nowtime = new Date();
+    this.today_time = "今天是："+nowtime.getFullYear() + '-' + (nowtime.getMonth() + 1) + '-' + nowtime.getDate()
+
+    "上次记录的日期为"
   },
   computed: {},
   methods: {}

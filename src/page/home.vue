@@ -10,7 +10,10 @@
         </el-col>
       </el-row>
       <el-row :gutter="8">
-        {{ last_time }}
+
+      </el-row>
+      <el-row :gutter="8">
+        哈哈哈
       </el-row>
     </section>
   </div>
@@ -36,7 +39,11 @@ export default {
   mounted() {
     var nowtime = new Date();
     this.today_time = "今天是："+nowtime.getFullYear() + '-' + (nowtime.getMonth() + 1) + '-' + nowtime.getDate()
-
+    this.$axios.post('outfit/get_last_outfit?name=' + this.login_name).then(
+        (data) => {
+          console.log(data)
+        }
+    )
     "上次记录的日期为"
   },
   computed: {},

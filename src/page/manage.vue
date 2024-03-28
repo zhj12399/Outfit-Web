@@ -5,8 +5,8 @@
         <el-menu :default-active="defaultActive" style="min-height: 100%;" theme="dark" router>
           <el-menu-item index="manage"><i class="el-icon-menu"></i>今日</el-menu-item>
           <el-menu-item index="outfit_list"><i class="el-icon-document"></i>穿搭记录</el-menu-item>
-          <el-menu-item index="addcaffeine"><i class="el-icon-plus"></i>增添数据</el-menu-item>
-          <el-menu-item index="info"><i class="el-icon-warning"></i>说明</el-menu-item>
+          <el-menu-item index="add_outfit"><i class="el-icon-plus"></i>增添数据</el-menu-item>
+          <el-menu-item index="user_set"><i class="el-icon-warning"></i>说明</el-menu-item>
         </el-menu>
       </el-col>
       <el-col :span="20" style="height: 100%;overflow: auto;">

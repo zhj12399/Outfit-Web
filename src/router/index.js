@@ -10,6 +10,7 @@ const manage = r => require.ensure([], () => r(require('@/page/manage')), 'manag
 const home = r => require.ensure([], () => r(require('@/page/home')), 'home');
 const outfit_list = r => require.ensure([], () => r(require('@/page/outfit_list')), 'outfit_list');
 const add_outfit = r => require.ensure([], () => r(require('@/page/add_outfit')), 'add_outfit');
+const user_set = r => require.ensure([], () => r(require('@/page/user_set')), 'user_set');
 
 const routes = [
     {
@@ -37,6 +38,9 @@ const routes = [
         }, {
             path: '/add_outfit',
             component: add_outfit,
+        }, {
+            path: '/user_set',
+            component: user_set,
         }],
 
     }

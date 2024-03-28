@@ -6,11 +6,11 @@
     </section>
     <el-row style="margin-top: 20px;">
       <el-form :model="formData" :rules="rules" ref="formData" label-width="110px" class="demo-formData">
-        <el-form-item label="饮用时间" class="block">
+        <el-form-item label="记录日期" class="block">
           <el-date-picker
               v-model="formData"
-              type="datetime"
-              placeholder="选择日期时间">
+              type="date"
+              placeholder="选择日期">
           </el-date-picker>
           <el>（未选择则默认当下时间）</el>
         </el-form-item>
@@ -21,21 +21,21 @@
           <el-radio v-model="formData.brand" label="4">雀巢</el-radio>
           <el-radio v-model="formData.brand" label="5">其它品牌</el-radio>
         </el-form-item>
-        <el-form-item label="下衣" prop="starbucks" v-if="formData.brand==='1'">
+        <el-form-item label="下衣" prop="starbucks">
           <el-radio v-model="formData.type" label="1">美式</el-radio>
           <el-radio v-model="formData.type" label="2">拿铁</el-radio>
           <el-radio v-model="formData.type" label="3">摩卡</el-radio>
           <el-radio v-model="formData.type" label="4">馥芮白</el-radio>
           <el-radio v-model="formData.type" label="5">冷萃</el-radio>
         </el-form-item>
-        <el-form-item label="鞋子" prop="luckin" v-if="formData.brand==='2'">
+        <el-form-item label="鞋子" prop="luckin">
           <el-radio v-model="formData.type" label="1">美式</el-radio>
           <el-radio v-model="formData.type" label="2">拿铁</el-radio>
           <el-radio v-model="formData.type" label="3">摩卡</el-radio>
           <el-radio v-model="formData.type" label="4">澳瑞白</el-radio>
           <el-radio v-model="formData.type" label="5">加浓美式</el-radio>
         </el-form-item>
-        <el-form-item label="手饰" prop="hands" v-if="formData.brand==='3'">
+        <el-form-item label="手饰" prop="hands">
           <el-radio v-model="formData.type" label="1">美式</el-radio>
           <el-radio v-model="formData.type" label="2">拿铁</el-radio>
           <el-radio v-model="formData.type" label="3">摩卡</el-radio>
@@ -57,9 +57,7 @@ export default {
   data() {
     return {
       formData: {
-        year: '',
-        month: '',
-        day: '',
+        date: '',
         t: '1',
         up: '1',
         down: '2',
@@ -85,17 +83,7 @@ export default {
   },
   methods: {
     addcaffeinerecord() {
-      if (this.formData.percent === '1') {
-        this.sqlData.percent = 1.0;
-      } else if (this.formData.percent === '2') {
-        this.sqlData.percent = 0.75;
-      } else if (this.formData.percent === '3') {
-        this.sqlData.percent = 0.67;
-      } else if (this.formData.percent === '4') {
-        this.sqlData.percent = 0.33;
-      } else if (this.formData.percent === '5') {
-        this.sqlData.percent = 0.25;
-      }
+
       if (this.formData.time === '') {
         this.formData.time = new Date();
       }

@@ -63,10 +63,10 @@ export default {
         hands: '1',
       },
       sqlData: {
-        brand: '',
-        type: '',
-        cups: '',
-        percent: '',
+        up: '',
+        down: '',
+        shoes: '',
+        hands: '',
         caffeine: 0.0,
       },
       rules: {

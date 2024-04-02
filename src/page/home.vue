@@ -42,7 +42,6 @@ export default {
     this.today_time = "今天是：" + nowtime.getFullYear() + '-' + (nowtime.getMonth() + 1) + '-' + nowtime.getDate()
     this.$axios.post('outfit/get_last_outfit?name=' + this.login_name).then(
         (response) => {
-          console.log(response)
           if (response.data === "") {
             this.last_time_one = "还没有记录穿搭过呦，快去添加吧";
           } else {

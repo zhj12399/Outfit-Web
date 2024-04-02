@@ -5,14 +5,14 @@
       <header class="section_title">纪录穿搭</header>
     </section>
     <el-row style="margin-top: 20px;">
-      <el-form :model="formData" :rules="rules" ref="formData" label-width="110px" class="demo-formData">
+      <el-form :model="formData" ref="formData" label-width="110px" class="demo-formData">
         <el-form-item label="记录日期" class="block">
           <el-date-picker
-              v-model="formData.time"
+              v-model="formData.date"
               type="date"
               placeholder="选择日期时间">
           </el-date-picker>
-          <el>（未选择则默认当下时间）</el>
+          （未选择则默认当下时间）
         </el-form-item>
         <el-form-item label="选择温度">
           <el-slider v-model="formData.t" :min="-30" :max="40" :show-input="true" :step="1"></el-slider>
@@ -98,14 +98,14 @@ export default {
       }).then(() => {
         this.$axios.post('outfit/add_outfit/', {
           "name": sessionStorage.getItem("login_name"),
-          "year": this.formData.year,
-          "month": this.formData.month,
-          "day": this.formData.day,
-          "t": this.formData.t,
-          "up": this.formData.up,
-          "down": this.formData.down,
-          "shoes": this.formData.shoes,
-          "hands": this.formData.hands,
+          "year": this.sqlData.year,
+          "month": this.sqlData.month,
+          "day": this.sqlData.day,
+          "t": this.sqlData.t,
+          "up": this.sqlData.up,
+          "down": this.sqlData.down,
+          "shoes": this.sqlData.shoes,
+          "hands": this.sqlData.hands,
         }).then(
             () => {
               this.$message({

@@ -8,42 +8,40 @@
       <el-form :model="formData" :rules="rules" ref="formData" label-width="110px" class="demo-formData">
         <el-form-item label="记录日期" class="block">
           <el-date-picker
-              v-model="formData"
+              v-model="formData.time"
               type="date"
-              placeholder="选择日期">
+              placeholder="选择日期时间">
           </el-date-picker>
           <el>（未选择则默认当下时间）</el>
         </el-form-item>
-        <el-form-item label="上衣" prop="brand">
-          <el-radio v-model="formData.brand" label="1">星巴克</el-radio>
-          <el-radio v-model="formData.brand" label="2">瑞幸</el-radio>
-          <el-radio v-model="formData.brand" label="3">麦当劳</el-radio>
-          <el-radio v-model="formData.brand" label="4">雀巢</el-radio>
-          <el-radio v-model="formData.brand" label="5">其它品牌</el-radio>
+        <el-form-item label="选择温度">
+          <el-slider v-model="formData.t" :min="-30" :max="40" :show-input="true" :step="1"></el-slider>
         </el-form-item>
-        <el-form-item label="下衣" prop="starbucks">
-          <el-radio v-model="formData.type" label="1">美式</el-radio>
-          <el-radio v-model="formData.type" label="2">拿铁</el-radio>
-          <el-radio v-model="formData.type" label="3">摩卡</el-radio>
-          <el-radio v-model="formData.type" label="4">馥芮白</el-radio>
-          <el-radio v-model="formData.type" label="5">冷萃</el-radio>
+        <el-form-item label="上衣" prop="up">
+          <el-radio v-model="formData.up" label="1">棉袄</el-radio>
+          <el-radio v-model="formData.up" label="2">夹克</el-radio>
+          <el-radio v-model="formData.up" label="3">卫衣</el-radio>
+          <el-radio v-model="formData.up" label="4">短袖</el-radio>
         </el-form-item>
-        <el-form-item label="鞋子" prop="luckin">
-          <el-radio v-model="formData.type" label="1">美式</el-radio>
-          <el-radio v-model="formData.type" label="2">拿铁</el-radio>
-          <el-radio v-model="formData.type" label="3">摩卡</el-radio>
-          <el-radio v-model="formData.type" label="4">澳瑞白</el-radio>
-          <el-radio v-model="formData.type" label="5">加浓美式</el-radio>
+        <el-form-item label="下衣" prop="down">
+          <el-radio v-model="formData.down" label="1">棉裤</el-radio>
+          <el-radio v-model="formData.down" label="2">秋裤</el-radio>
+          <el-radio v-model="formData.down" label="3">加绒</el-radio>
+          <el-radio v-model="formData.down" label="4">单裤</el-radio>
+          <el-radio v-model="formData.down" label="5">短裤</el-radio>
+        </el-form-item>
+        <el-form-item label="鞋子" prop="shoes">
+          <el-radio v-model="formData.shoes" label="1">球鞋</el-radio>
+          <el-radio v-model="formData.shoes" label="2">布鞋</el-radio>
+          <el-radio v-model="formData.shoes" label="3">皮鞋</el-radio>
         </el-form-item>
         <el-form-item label="手饰" prop="hands">
-          <el-radio v-model="formData.type" label="1">美式</el-radio>
-          <el-radio v-model="formData.type" label="2">拿铁</el-radio>
-          <el-radio v-model="formData.type" label="3">摩卡</el-radio>
-          <el-radio v-model="formData.type" label="4">冰醇咖啡</el-radio>
-          <el-radio v-model="formData.type" label="5">卡布奇诺</el-radio>
+          <el-radio v-model="formData.hands" label="1">遮阳帽</el-radio>
+          <el-radio v-model="formData.hands" label="2">冰袖</el-radio>
+          <el-radio v-model="formData.hands" label="3">围巾</el-radio>
         </el-form-item>
         <el-form-item class="button_submit">
-          <el-button type="primary" @click='addcaffeinerecord'>立即添加</el-button>
+          <el-button type="primary" @click='add_outfit'>立即添加</el-button>
         </el-form-item>
       </el-form>
     </el-row>
@@ -58,11 +56,11 @@ export default {
     return {
       formData: {
         date: '',
-        t: '1',
+        t: 15,
         up: '1',
-        down: '2',
+        down: '1',
         shoes: '1',
-        hands: '',
+        hands: '1',
       },
       sqlData: {
         brand: '',
@@ -82,8 +80,7 @@ export default {
     headTop,
   },
   methods: {
-    addcaffeinerecord() {
-
+    add_outfit() {
       if (this.formData.time === '') {
         this.formData.time = new Date();
       }

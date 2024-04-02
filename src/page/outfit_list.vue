@@ -10,10 +10,6 @@
           highlight-current-row
           style="width: 100%">
         <el-table-column
-            type="index"
-            width="100">
-        </el-table-column>
-        <el-table-column
             property="time"
             label="日期"
             sortable>

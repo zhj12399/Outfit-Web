@@ -7,7 +7,7 @@
     <div class="admin_set">
       <ul>
         <li>
-          <span>昵称：</span><span>{{ Caffeineusername }}</span>
+          <span>昵称：</span><span>{{ user_name }}</span>
         </li>
       </ul>
     </div>
@@ -21,7 +21,7 @@ import headTop from '../components/headTop'
 export default {
   data() {
     return {
-      user_name:''
+      user_name:sessionStorage.getItem("login_name"),
     }
   },
   components: {

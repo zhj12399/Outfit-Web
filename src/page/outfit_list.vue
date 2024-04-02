@@ -63,7 +63,6 @@ export default {
       this.$axios.post('outfit/get_all_outfit/?name=' + sessionStorage.getItem("login_name"))
           .then(
               (response) => {
-                console.log(response);
                 for (var i in response.data) {
                   var tmp_json = {};
                   tmp_json.time = response.data[i].year + "-" + response.data[i].month + "-" + response.data[i].day;

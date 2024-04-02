@@ -18,27 +18,27 @@
           <el-slider v-model="formData.t" :min="-30" :max="40" :show-input="true" :step="1"></el-slider>
         </el-form-item>
         <el-form-item label="上衣" prop="up">
-          <el-radio v-model="formData.up" label="1">棉袄</el-radio>
-          <el-radio v-model="formData.up" label="2">夹克</el-radio>
-          <el-radio v-model="formData.up" label="3">卫衣</el-radio>
-          <el-radio v-model="formData.up" label="4">短袖</el-radio>
+          <el-radio v-model="formData.up" label="棉袄">棉袄</el-radio>
+          <el-radio v-model="formData.up" label="夹克">夹克</el-radio>
+          <el-radio v-model="formData.up" label="卫衣">卫衣</el-radio>
+          <el-radio v-model="formData.up" label="短袖">短袖</el-radio>
         </el-form-item>
         <el-form-item label="下衣" prop="down">
-          <el-radio v-model="formData.down" label="1">棉裤</el-radio>
-          <el-radio v-model="formData.down" label="2">秋裤</el-radio>
-          <el-radio v-model="formData.down" label="3">加绒</el-radio>
-          <el-radio v-model="formData.down" label="4">单裤</el-radio>
-          <el-radio v-model="formData.down" label="5">短裤</el-radio>
+          <el-radio v-model="formData.down" label="棉裤">棉裤</el-radio>
+          <el-radio v-model="formData.down" label="秋裤">秋裤</el-radio>
+          <el-radio v-model="formData.down" label="加绒">加绒</el-radio>
+          <el-radio v-model="formData.down" label="单裤">单裤</el-radio>
+          <el-radio v-model="formData.down" label="短裤">短裤</el-radio>
         </el-form-item>
         <el-form-item label="鞋子" prop="shoes">
-          <el-radio v-model="formData.shoes" label="1">球鞋</el-radio>
-          <el-radio v-model="formData.shoes" label="2">布鞋</el-radio>
-          <el-radio v-model="formData.shoes" label="3">皮鞋</el-radio>
+          <el-radio v-model="formData.shoes" label="球鞋">球鞋</el-radio>
+          <el-radio v-model="formData.shoes" label="布鞋">布鞋</el-radio>
+          <el-radio v-model="formData.shoes" label="皮鞋">皮鞋</el-radio>
         </el-form-item>
         <el-form-item label="手饰" prop="hands">
-          <el-radio v-model="formData.hands" label="1">遮阳帽</el-radio>
-          <el-radio v-model="formData.hands" label="2">冰袖</el-radio>
-          <el-radio v-model="formData.hands" label="3">围巾</el-radio>
+          <el-radio v-model="formData.hands" label="遮阳帽">遮阳帽</el-radio>
+          <el-radio v-model="formData.hands" label="冰袖">冰袖</el-radio>
+          <el-radio v-model="formData.hands" label="围巾">围巾</el-radio>
         </el-form-item>
         <el-form-item class="button_submit">
           <el-button type="primary" @click='add_outfit'>立即添加</el-button>
@@ -56,23 +56,21 @@ export default {
     return {
       formData: {
         date: '',
-        t: 15,
-        up: '1',
-        down: '1',
-        shoes: '1',
-        hands: '1',
+        t: 16,
+        up: '棉袄',
+        down: '棉裤',
+        shoes: '球鞋',
+        hands: '遮阳帽',
       },
       sqlData: {
+        year: 2023,
+        month: 7,
+        day: 13,
+        t: 16,
         up: '',
         down: '',
         shoes: '',
         hands: '',
-        caffeine: 0.0,
-      },
-      rules: {
-        time: [
-          {required: true, message: '请选择时间', trigger: 'blur'},
-        ]
       },
     }
   },
@@ -81,60 +79,45 @@ export default {
   },
   methods: {
     add_outfit() {
-      if (this.formData.time === '') {
-        this.formData.time = new Date();
+      if (this.formData.date === '') {
+        this.formData.date = new Date();
       }
-      this.$confirm('您选择了' + this.sqlData.brand + '的一杯' + this.sqlData.type + '，其杯型是：' + this.sqlData.cups + '杯，喝了' + this.sqlData.percent + '杯，大约含有咖啡因' + this.sqlData.caffeine.toFixed(2) + 'mg', '提示', {
+      this.sqlData.year = this.formData.date.getFullYear();
+      this.sqlData.month = this.formData.date.getMonth() + 1;
+      this.sqlData.day = this.formData.date.getDate();
+      this.sqlData.t = this.formData.t;
+      this.sqlData.up = this.formData.up;
+      this.sqlData.down = this.formData.down;
+      this.sqlData.shoes = this.formData.shoes;
+      this.sqlData.hands = this.formData.hands;
+
+      this.$confirm('时间：' + this.sqlData.year + '-' + this.sqlData.month + '-' + this.sqlData.day + ' 温度：' + this.sqlData.t + ' 您选择了' + this.sqlData.up + ',' + this.sqlData.down + ',' + this.sqlData.shoes + ',' + this.sqlData.hands, '新增提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
-        type: 'warning'
+        type: 'success'
       }).then(() => {
-        this.$axios.post('People/ExistPeople/' + sessionStorage.getItem("loginid"))
-            .then(
-                (data) => {
-                  if (!data.data) {
-                    sessionStorage.setItem("loginid", "")
-                    this.$message({
-                      type: 'info',
-                      message: '请您重新登录'
-                    });
-                    this.$router.push('/')
-                  }
-                },
-                (err) => {
-                  this.$message({
-                    type: 'error',
-                    message: '错误信息：' + err
-                  });
-                })
-        this.$axios.post('Caffeine/AddCaffeineRecord', {
-          "id": sessionStorage.getItem("loginid"),
-          "time": this.formData.time,
-          "brand": this.sqlData.brand,
-          "type": this.sqlData.type,
-          "size": this.sqlData.cups,
-          "percent": this.sqlData.percent,
-          "caffeine": this.sqlData.caffeine.toFixed(2),
+        this.$axios.post('outfit/add_outfit/', {
+          "name": sessionStorage.getItem("login_name"),
+          "year": this.formData.year,
+          "month": this.formData.month,
+          "day": this.formData.day,
+          "t": this.formData.t,
+          "up": this.formData.up,
+          "down": this.formData.down,
+          "shoes": this.formData.shoes,
+          "hands": this.formData.hands,
         }).then(
-            (data) => {
-              if (data.data === true) {
-                this.$message({
-                  type: 'success',
-                  message: '提交成功'
-                });
-              } else {
-                this.$message({
-                  type: 'warning',
-                  message: '您不能在同一时间引用两个饮品',
-                });
-              }
-            },
             () => {
               this.$message({
-                type: 'error',
-                message: '提交错误',
+                type: 'success',
+                message: "添加成功"
               });
-
+            },
+            (err) => {
+              this.$message({
+                type: 'error',
+                message: '错误信息：' + err
+              });
             })
       }).catch(() => {
         this.$message({
@@ -142,7 +125,6 @@ export default {
           message: '已取消提交'
         });
       });
-
     }
   }
 }
